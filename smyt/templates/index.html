@@ -1,12 +1,14 @@
 <html>
 <head>
-
 </head>
 <body>
-	
-test
-
-<a href="/load"> Загрузить</a>
+<div>
+        {% for model in models %}
+            <div>
+                <a href=""> --- {{ model.name }}</a>
+            </div>
+        {% endfor %}
+</div>
 </body>
 
 </html>

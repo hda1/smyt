@@ -13,55 +13,36 @@ class MetaModel():
             setattr(self.Meta, key, value)
             
         return type(name, (models.Model, MetaModel, ), fields)
+    
+    def __unicode__(self):
+        return self._meta.fields[1].value_to_string(self)
         
 def createModels():
     
-
     resultAttr = {}
     resulFields = {}
     
     data = yaml.load(open('/home/sam/Aptana Studio 3 Workspace/smyt/test.yml', "r"))
-    for key, value in data.iteritems(): # for users, rums
+    
+    for key in data.keys():
+
         f = MetaModel()
         resulFields.clear()
 
-        #print type(value['fields']), value['fields'][0]['id']
-
-
-        for field in value['fields']:
+        for field in data[key]['fields']:
             typesOfField = {'char':models.CharField(max_length = 50, verbose_name=field['title']), 
                             'int':models.IntegerField(verbose_name=field['title']), 
                             'date':models.DateField(verbose_name=field['title'])}
 
-            resulFields[field['id']] = typesOfField.get(field['type'], models.CharField(max_length = 50, verbose_name=value['title']))
-            resultAttr['verbose_name_plural'] = value['title']
-        
-        
-        
-        #resulFields[field['id']]
-        #def __unicode__(self):
-        #    return eval('self.' + value['fields'][0]['id'])
-        
-        #f.__unicode__ = __unicode__
-        print 'key =', key
-        ff = f.create(key, resulFields, resultAttr)
-        
-        def __unicode__(self):
-            return eval('self.' + value['fields'][0]['id'])
-        
-        ff.__unicode__ = __unicode__
-        
-        print 'id =', value['fields'][0]['id']
-        
-        #models.Model.
+            resulFields[field['id']] = typesOfField.get(field['type'], models.CharField(max_length = 50, verbose_name=data[key]['title']))
+            resultAttr['verbose_name_plural'] = data[key]['title']
+
+        f.create(key, resulFields, resultAttr)
+
         f = None
-        #print ff.__subclasses__()
-        #print 'ff', getattr(ff, value['fields'][0]['id'])
-        #print  type(value['fields'][0]['id']), value['fields'][0]['id']
+
+
+    
+    
         
-        #ff.setUnicode()
-        #print ff.__unicode__(ff)
-        
-    from django.core.management import call_command
-    call_command('syncdb', interactive=False)    
         
