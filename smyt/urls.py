@@ -6,6 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'smyt.views.index'),
+    url(r'^json/(?P<model_name>[^/]*)/$', 'smyt.views.json'),
     url(r'^load$', 'smyt.views.load'),
     #url(r'^smyt/load', include('smyt.load')),
 

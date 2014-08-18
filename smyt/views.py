@@ -3,7 +3,9 @@
 import os
 
 from django.db.models import get_app, get_models
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
+from django.utils import simplejson
 
 def index(request):
     models = []
@@ -19,16 +21,10 @@ def index(request):
         
     return render_to_response("index.html", locals())
 
+def json(request):
+    
+    return HttpResponse(simplejson.dumps(result))
+
 def load(request):
-    #print os.path.dirname(__file__)
-        
-        #for key in key.iterkeys():
-    
-    #for obj in serializers.deserialize("yaml", data):
-    #   print obj
-    
-    #from django.core.management import call_command
-    #call_command('loaddata', '/fixtures/initial_data.yaml')
-    #call_command('syncdb')
     
     return render_to_response("index.html", locals())
