@@ -4,10 +4,13 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+from .views import IndexView, JsonView
+
 urlpatterns = patterns('',
-    url(r'^$', 'smyt.views.index'),
-    url(r'^json/(?P<model_name>[^/]*)/$', 'smyt.views.json'),
-    url(r'^load$', 'smyt.views.load'),
+    url(r'^$', IndexView.as_view(), name='home'),
+    url(r'^json/(?P<model_name>[^/]*)/$', JsonView.as_view()),
+    #url(r'^json/(?P<model_name>[^/]*)/$', IndexView.as_view(), name='home2'),
+    #url(r'^load$', 'smyt.views.load'),
     #url(r'^smyt/load', include('smyt.load')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

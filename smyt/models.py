@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-from django.db import models
+
 import yaml
+
+from django.db import models
 
 class MetaModel():
     class Meta:

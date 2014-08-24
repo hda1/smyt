@@ -1,14 +1,29 @@
 <html>
 <head>
+	<script src="{{ STATIC_URL }}jquery-2.1.1.min.js"></script>
+	<script src="{{ STATIC_URL }}smyt.js"></script>
+
+
 </head>
 <body>
-<div>
+<div> 
+<ul> 
         {% for model in models %}
             <div>
-                <a href=""> --- {{ model.name }}</a>
+                <li><a href="{{model.url}}" class="model-link">{{ model.name }}</a></li>
             </div>
         {% endfor %}
+</ul>
 </div>
+<div id="item_list">
+
+</div>
+<div id="item_list2">
+
+</div>
+
+<div id="movieList"></div>
+
 </body>
 
 </html>

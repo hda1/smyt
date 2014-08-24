@@ -4,7 +4,7 @@ from django.db import models
 from models import createModels
 from utils import test
 
-test()
+#test()
 
 createModels()
 
