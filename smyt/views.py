@@ -27,24 +27,12 @@ class JsonView(View):
     
     def get(self, request, model_name = None, *args, **kwargs):
         model = get_model(__package__, model_name)
-        result = {}
-        #result.append([x.verbose_name for x in model._meta.fields])
-        
-        #print u'[' + u','.join(u"'" + unicode(x) + u"'" for x in result) + u']'
-        #print model._meta.fields[1].verbose_name, type(result)
-        #print 'result = ', str(result)
-        
-        items = model.objects.all()
         rows = []
+        rows.append([x.verbose_name for x in model._meta.fields])
+        items = model.objects.all()
         for item in items:
-            row = {}
-            for field in item._meta.fields:
-                row[field.attname] = getattr(item, field.attname)
-            #[row[x.attname] = getattr(item, x.attname) for x in item._meta.fields]
+            row = []
+            [row.append(getattr(item, x.attname)) for x in item._meta.fields]
             rows.append( row )
-        result['rows'] = rows
-        
-        #print json.dumps([unicode(t) for t in result], cls = DjangoJSONEncoder)
-            
-        return HttpResponse(json.dumps(result, cls = DjangoJSONEncoder), content_type = "application/json")
+        return HttpResponse(json.dumps(rows, cls = DjangoJSONEncoder), content_type = "application/json")
     

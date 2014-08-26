@@ -5,8 +5,12 @@ $(document).ready(function(){
 		
 		$.getJSON('/json/' + $(this).attr('href'), function(data){
 		var html;	
-			for (var i = 0; i < data['rows'].length; i++	 ){
-				html = html + data['rows'][i]['name'];
+			for (var i = 0; i < data.length; i++){
+				html = html + '<tr>';
+				for (var j = 0; j < data[i].length; j++){
+					html = html + '<td>' + data[i][j] + '</td>';
+				}
+				html = html + '</tr>';
 				}
 			$('#item_list').html(html);	
 

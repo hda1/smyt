@@ -1,0 +1,13 @@
+
+#models{
+	float: left;
+	margin-right: 20px;
+}
+
+table, td {
+	border: 1px solid #000;
+}
+
+ul {
+	margin: 0;
+}
